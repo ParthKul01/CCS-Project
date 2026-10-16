@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Verify code - {{ app_name }}{% endblock %}
+{% block content %}
+<h1>Enter your code</h1>
+<p>Open your authenticator app and enter the 6-digit code.</p>
+<form method="post" autocomplete="off">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="otp">6-digit code</label>
+  <input id="otp" name="otp" class="code" inputmode="numeric" pattern="[0-9 ]{6,7}" maxlength="7" required autofocus autocomplete="one-time-code">
+  <button type="submit">Verify and log in</button>
+</form>
+<p class="alt"><a href="{{ url_for('login') }}">Back to password</a></p>
+{% endblock %}

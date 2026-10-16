@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - {{ app_name }}{% endblock %}
+{% block content %}
+<h1>Welcome, {{ user.username }}</h1>
+<p>You are signed in with password and one-time code.</p>
+<dl class="facts">
+  <dt>MFA</dt><dd>{{ 'Enabled (TOTP)' if user.mfa_enabled else 'Not enabled' }}</dd>
+  <dt>Member since</dt><dd>{{ user.created_at | datetimefmt }}</dd>
+</dl>
+<h2>Recent activity</h2>
+<table>
+  <thead><tr><th>Time</th><th>Event</th><th>IP</th></tr></thead>
+  <tbody>
+  {% for e in events %}
+    <tr><td>{{ e.created_at | datetimefmt }}</td><td>{{ e.event }}</td><td>{{ e.ip }}</td></tr>
+  {% else %}
+    <tr><td colspan="3">No activity yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

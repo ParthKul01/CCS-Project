@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Register - {{ app_name }}{% endblock %}
+{% block content %}
+<h1>Create account</h1>
+<form method="post" autocomplete="off">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="username">Username</label>
+  <input id="username" name="username" value="{{ username }}" required minlength="3" maxlength="20" autofocus>
+  <label for="password">Password</label>
+  <input id="password" name="password" type="password" required minlength="8" maxlength="64" autocomplete="new-password">
+  <p class="hint">8-64 characters with upper and lower case, a digit and a special character.</p>
+  <label for="confirm">Confirm password</label>
+  <input id="confirm" name="confirm" type="password" required autocomplete="new-password">
+  <button type="submit">Create account</button>
+</form>
+<p class="alt">Already registered? <a href="{{ url_for('login') }}">Log in</a></p>
+{% endblock %}

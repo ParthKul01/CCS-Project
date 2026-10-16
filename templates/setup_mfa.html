@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Set up MFA - {{ app_name }}{% endblock %}
+{% block content %}
+<h1>Set up authenticator</h1>
+<p>Scan this QR code with Google Authenticator, Microsoft Authenticator or Authy.</p>
+<img class="qr" src="{{ qr }}" alt="QR code for authenticator app" width="220" height="220">
+<p class="hint">Cannot scan? Enter this key manually (time-based):</p>
+<p class="secret">{{ secret }}</p>
+<form method="post" autocomplete="off">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="otp">Code from the app</label>
+  <input id="otp" name="otp" class="code" inputmode="numeric" pattern="[0-9 ]{6,7}" maxlength="7" required autocomplete="one-time-code">
+  <button type="submit">Verify and enable MFA</button>
+</form>
+{% endblock %}
